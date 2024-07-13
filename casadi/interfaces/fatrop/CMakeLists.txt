@@ -56,3 +56,8 @@ target_include_directories(casadi_nlpsol_fatrop
   PUBLIC
     $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
 )
+
+target_include_directories(casadi_conic_fatrop SYSTEM PUBLIC /Users/tudoroancea/Developer/casadi/build/external_projects/include)
+target_include_directories(casadi_nlpsol_fatrop SYSTEM PUBLIC /Users/tudoroancea/Developer/casadi/build/external_projects/include)
+target_include_directories(casadi_conic_fatrop SYSTEM PUBLIC /Users/tudoroancea/Developer/casadi/build/external_projects/include/blasfeo/include)
+target_include_directories(casadi_nlpsol_fatrop SYSTEM PUBLIC /Users/tudoroancea/Developer/casadi/build/external_projects/include/blasfeo/include)
