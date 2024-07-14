@@ -23,8 +23,8 @@
  */
 
 
-#include <ocp/OCPAbstract.hpp>
-#include <ocp/StageOCPApplication.hpp>
+#include <fatrop/ocp/OCPAbstract.hpp>
+#include <fatrop/ocp/StageOCPApplication.hpp>
 #include <casadi/core/casadi_misc.hpp>
 
 /**

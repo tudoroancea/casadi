@@ -5,23 +5,14 @@ casadi_plugin(Conic fatrop
   fatrop_conic_interface.cpp
   fatrop_conic_interface_meta.cpp
   "${CMAKE_CURRENT_BINARY_DIR}/fatrop_conic_runtime_str.h"
-  )
+)
 
 casadi_plugin_link_libraries(Conic fatrop fatrop)
 
-casadi_plugin(Nlpsol fatrop
-  fatrop_interface.hpp
-  fatrop_interface.cpp
-  fatrop_interface_meta.cpp
-  "${CMAKE_CURRENT_BINARY_DIR}/fatrop_runtime_str.h"
-  )
-
-casadi_plugin_link_libraries(Nlpsol fatrop fatrop)
-
-
-#add_executable(fatrop_test fatrop_test.cpp)
-#target_link_libraries(fatrop_test fatrop casadi)
-
+target_include_directories(casadi_conic_fatrop
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
+)
 
 # Add the runtime sources to internal (installed separately)
 set(RUNTIME_SRC "fatrop_conic_runtime.hpp")
@@ -33,6 +24,24 @@ add_custom_command(
   COMMAND  ${CMAKE_COMMAND} -D OUTPUT="${CMAKE_CURRENT_BINARY_DIR}/fatrop_conic_runtime_str.h" -D SOURCES="${RUNTIME_SRC}" -P "${CMAKE_CURRENT_SOURCE_DIR}/../../generate_runtime.cmake"
   DEPENDS ${RUNTIME_SRC}
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+)
+
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
+
+casadi_plugin(Nlpsol fatrop
+  fatrop_interface.hpp
+  fatrop_interface.cpp
+  fatrop_interface_meta.cpp
+  "${CMAKE_CURRENT_BINARY_DIR}/fatrop_runtime_str.h"
+)
+
+casadi_plugin_link_libraries(Nlpsol fatrop fatrop)
+
+target_include_directories(casadi_nlpsol_fatrop
+  PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
 )
 
 # Add the runtime sources to internal (installed separately)
@@ -47,17 +56,9 @@ add_custom_command(
   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-target_include_directories(casadi_conic_fatrop
-  PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-)
+#########################################################################################################
+#########################################################################################################
+#########################################################################################################
 
-target_include_directories(casadi_nlpsol_fatrop
-  PUBLIC
-    $<BUILD_INTERFACE:${CMAKE_CURRENT_BINARY_DIR}>
-)
-
-target_include_directories(casadi_conic_fatrop SYSTEM PUBLIC /Users/tudoroancea/Developer/casadi/build/external_projects/include)
-target_include_directories(casadi_nlpsol_fatrop SYSTEM PUBLIC /Users/tudoroancea/Developer/casadi/build/external_projects/include)
-target_include_directories(casadi_conic_fatrop SYSTEM PUBLIC /Users/tudoroancea/Developer/casadi/build/external_projects/include/blasfeo/include)
-target_include_directories(casadi_nlpsol_fatrop SYSTEM PUBLIC /Users/tudoroancea/Developer/casadi/build/external_projects/include/blasfeo/include)
+# add_executable(fatrop_test fatrop_test.cpp)
+# target_link_libraries(fatrop_test fatrop casadi)

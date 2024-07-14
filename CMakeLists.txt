@@ -582,8 +582,8 @@ set(BUILD_HPIPM_DEPENDENCIES BLASFEO)
 
 # FATROP
 option(WITH_FATROP "Compile the interface to FATROP" OFF)
-set(BUILD_FATROP_VERSION "80596879e00120e1d15f8ce09dc432a2a56942f6" CACHE STRING "Tag/branch/hash to be used for BUILD_FATROP_GIT_REPO")
-set(BUILD_FATROP_GIT_REPO "https://github.com/meco-group/fatrop.git" CACHE STRING "Git repo used together with BUILD_FATROP_VERSION")
+set(BUILD_FATROP_VERSION "abac17cf51a9fcc50ddc35102a39c26031020aa4" CACHE STRING "Tag/branch/hash to be used for BUILD_FATROP_GIT_REPO")
+set(BUILD_FATROP_GIT_REPO "https://github.com/tudoroancea/fatrop" CACHE STRING "Git repo used together with BUILD_FATROP_VERSION")
 option(WITH_BUILD_FATROP "Build FATROP (BUILD_FATROP_VERSION=${BUILD_FATROP_VERSION}) from downloaded source (BUILD_FATROP_GIT_REPO=${BUILD_FATROP_GIT_REPO})." OFF)
 set(BUILD_FATROP_DEPENDENCIES BLASFEO)
 
@@ -1160,7 +1160,7 @@ if(WITH_FATROP)
     # target_link_libraries(fatrop INTERFACE blasfeo)
     file(MAKE_DIRECTORY "${CMAKE_BINARY_DIR}/external_projects/include/fatrop")
     set_target_properties(fatrop PROPERTIES
-      INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/external_projects/include/fatrop"
+      INTERFACE_INCLUDE_DIRECTORIES "${CMAKE_BINARY_DIR}/external_projects/include"
       IMPORTED_LOCATION "${CMAKE_BINARY_DIR}/external_projects/${SHARED_LIBRARY_RELDIR}/${CMAKE_SHARED_LIBRARY_PREFIX}fatrop${CMAKE_SHARED_LIBRARY_SUFFIX}"
       IMPORTED_IMPLIB "${CMAKE_BINARY_DIR}/external_projects/lib/${CMAKE_IMPORT_LIBRARY_PREFIX}fatrop${CMAKE_IMPORT_LIBRARY_SUFFIX}"
     )
